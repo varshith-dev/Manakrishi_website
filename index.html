@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manakrishi | The Future of Farming</title>
+    <meta name="description" content="Manakrishi connects intelligent drones with farmers to create a sustainable, high-yield agricultural ecosystem.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="logo">Manakrishi<span class="dot">.</span></div>
+        <div class="nav-links">
+            <a href="#story">Our Story</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#technology">Technology</a>
+            <a href="#impact">Impact</a>
+        </div>
+        <button class="cta-small">Join the Revolution</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero-section">
+        <div class="hero-bg-layers">
+            <div class="layer sky"></div>
+            <div class="layer sun"></div>
+            <div class="layer mountains"></div>
+            <div class="layer fields"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="reveal-text">When Drones Speak</span><br>
+                <span class="reveal-text highlight">The Language of Farms</span>
+            </h1>
+            <p class="hero-subtitle">Creating a dialogue between technology and nature to feed the future.</p>
+            <a href="#story" class="cta-pulse">Discover the Ecosystem</a>
+        </div>
+
+        <div class="drone-container" id="hero-drone">
+            <!-- SVG Drone -->
+            <svg viewBox="0 0 200 100" class="drone-svg">
+                <defs>
+                    <filter id="glow-blue">
+                        <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <g class="drone-body">
+                    <ellipse cx="100" cy="50" rx="40" ry="15" fill="#fff" />
+                    <circle cx="100" cy="50" r="8" fill="#00bcd4" filter="url(#glow-blue)" class="drone-core"/>
+                    <!-- Arms -->
+                    <line x1="60" y1="50" x2="30" y2="30" stroke="#ccc" stroke-width="4"/>
+                    <line x1="140" y1="50" x2="170" y2="30" stroke="#ccc" stroke-width="4"/>
+                    <line x1="60" y1="50" x2="30" y2="70" stroke="#ccc" stroke-width="4"/>
+                    <line x1="140" y1="50" x2="170" y2="70" stroke="#ccc" stroke-width="4"/>
+                    <!-- Rotors -->
+                    <ellipse cx="30" cy="30" rx="20" ry="4" fill="rgba(255,255,255,0.5)" class="rotor"/>
+                    <ellipse cx="170" cy="30" rx="20" ry="4" fill="rgba(255,255,255,0.5)" class="rotor"/>
+                    <ellipse cx="30" cy="70" rx="20" ry="4" fill="rgba(255,255,255,0.5)" class="rotor"/>
+                    <ellipse cx="170" cy="70" rx="20" ry="4" fill="rgba(255,255,255,0.5)" class="rotor"/>
+                </g>
+                <g class="drone-lights">
+                    <circle cx="40" cy="80" r="2" fill="red" class="blink-light"/>
+                    <circle cx="160" cy="80" r="2" fill="green" class="blink-light"/>
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Story Section (Scroll Driven) -->
+    <section id="story" class="story-section">
+        <div class="story-container">
+            <div class="story-sticky">
+                <div class="drone-companion" id="story-drone">
+                    <!-- Simplified Drone for tracking -->
+                    <div class="mini-drone"></div>
+                </div>
+                <div class="particles-container" id="particles"></div>
+                <div class="plant-container">
+                    <svg viewBox="0 0 100 200" class="plant-svg">
+                        <path d="M50 200 Q50 150 50 100 Q30 70 20 50" stroke="#4caf50" stroke-width="4" fill="none" class="stem"/>
+                        <path d="M50 100 Q70 70 80 50" stroke="#4caf50" stroke-width="4" fill="none" class="stem" />
+                        <circle cx="50" cy="200" r="5" fill="#5d4037" />
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="story-text-blocks">
+                <div class="story-block" data-step="1">
+                    <h2>The Drone Listens</h2>
+                    <p>High-precision sensors analyze soil moisture and crop health in real-time.</p>
+                </div>
+                <div class="story-block" data-step="2">
+                    <h2>The Farm Responds</h2>
+                    <p>Hungry crops signal their need for nutrients. The ecosystem is alive.</p>
+                </div>
+                <div class="story-block" data-step="3">
+                    <h2>Precision Delivery</h2>
+                    <p>Micro-doses of Urea and Water are deployed exactly where needed. Zero waste.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="steps-section">
+        <h2 class="section-title">The Cycle of Intelligence</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-icon">👨‍🌾</div>
+                <h3>1. Farmer Request</h3>
+                <p>Simple booking via the Manakrishi App.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step-card">
+                <div class="step-icon">🚁</div>
+                <h3>2. Drone Deploys</h3>
+                <p>Autonomous flight path optimization.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step-card">
+                <div class="step-icon">💧</div>
+                <h3>3. Precision Spray</h3>
+                <p>Targeted nutrient and pesticide application.</p>
+            </div>
+            <div class="step-arrow">→</div>
+            <div class="step-card">
+                <div class="step-icon">🌾</div>
+                <h3>4. Growth & Yield</h3>
+                <p>Healthier crops, higher profits.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology -->
+    <section id="technology" class="tech-section">
+        <h2 class="section-title">Behind the Intelligence</h2>
+        <div class="tech-interface">
+            <div class="tech-panel left">
+                <div class="hud-element">
+                    <h4>Sensor Array</h4>
+                    <div class="bar-chart">
+                        <div class="bar" style="height: 60%"></div>
+                        <div class="bar" style="height: 80%"></div>
+                        <div class="bar" style="height: 40%"></div>
+                    </div>
+                    <p class="tech-detail">Multispectral Imaging</p>
+                </div>
+            </div>
+            <div class="tech-center">
+                <!-- A central glowing core representing the AI -->
+                <div class="ai-core"></div>
+            </div>
+            <div class="tech-panel right">
+                <div class="hud-element">
+                    <h4>Spray Efficiency</h4>
+                    <div class="circular-progress">98%</div>
+                    <p class="tech-detail">Navigate & distribute</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Farmer Impact -->
+    <section id="impact" class="impact-section">
+        <h2 class="section-title">Empowering the Hands that Feed</h2>
+        <div class="impact-cards">
+            <div class="impact-card">
+                <h3 class="counter" data-target="30">0</h3><span>%</span>
+                <p>Cost Reduction</p>
+            </div>
+            <div class="impact-card">
+                <h3 class="counter" data-target="50">0</h3><span>%</span>
+                <p>Time Saved</p>
+            </div>
+            <div class="impact-card">
+                <h3>100%</h3>
+                <p>Health Safety</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <footer class="footer-cta">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Farm?</h2>
+            <button class="cta-large">Get Started with Manakrishi</button>
+        </div>
+        <div class="drone-landing">
+            <!-- Drone silouhette landing -->
+            <svg class="landing-drone" viewBox="0 0 100 50">
+                <path d="M10 25 L90 25 M30 25 L20 40 M70 25 L80 40" stroke="#fff" stroke-width="2"/>
+            </svg>
+        </div>
+        <div class="footer-links">
+            <p>&copy; 2025 Manakrishi Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
