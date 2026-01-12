@@ -1,11 +1,28 @@
-import { db } from './firebase-init.js';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// Firebase Configuration (Compat)
+const firebaseConfig = {
+    apiKey: "AIzaSyBy2yNoxRWj0fR5_3zXWZoi7xwrusHBf9U",
+    authDomain: "manakrishi-booking.firebaseapp.com",
+    projectId: "manakrishi-booking",
+    storageBucket: "manakrishi-booking.firebasestorage.app",
+    messagingSenderId: "658175860538",
+    appId: "1:658175860538:web:a570816454f7d7697cfa03",
+    measurementId: "G-246CVYV263"
+};
+
+// Initialize Firebase (Compat)
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// Initialize Firestore
+const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', () => {
     const bookingForm = document.querySelector('.booking-form');
-    // Remove the inline onsubmit to prevent conflicts (or handle event.preventDefault correctly here)
+    // Remove the inline onsubmit
     if (bookingForm) {
-        bookingForm.removeAttribute('onsubmit'); // We will handle it with addEventListener
+        bookingForm.removeAttribute('onsubmit');
 
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -22,16 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 village: document.getElementById('village').value,
                 crop: document.getElementById('crop').value,
                 acres: document.getElementById('acres').value,
-                timestamp: serverTimestamp(),
-                status: 'new' // Initial status for the booking
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Compat timestamp
+                status: 'new'
             };
 
             try {
-                // Add a new document with a generated ID
-                const docRef = await addDoc(collection(db, "bookings"), formData);
+                // Add a new document using Compat syntax
+                const docRef = await db.collection("bookings").add(formData);
                 console.log("Document written with ID: ", docRef.id);
 
-                // Get success message based on language (optional dynamic check, falling back to English default logic or alert)
+                // Get success message based on language
                 const currentLang = localStorage.getItem('manakrishi_lang') || 'en';
                 const successMsg = currentLang === 'te'
                     ? "బుకింగ్ విజయవంతమైంది! మేము త్వరలో మిమ్మల్ని సంప్రదిస్తాము."
