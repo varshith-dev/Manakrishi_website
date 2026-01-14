@@ -42,44 +42,69 @@
     <!-- Booking Form Section -->
     <section class="booking-section">
         <div class="booking-container">
-            <h1 class="section-title" data-i18n="book-title">Book Drone Spraying</h1>
-            <p class="booking-subtitle" data-i18n="book-subtitle">Fill in the details below to schedule a service for
-                your farm.</p>
+            <div id="booking-wrapper">
+                <h1 class="section-title" data-i18n="book-title">Book Drone Spraying</h1>
+                <p class="booking-subtitle" data-i18n="book-subtitle">Fill in the details below to schedule a service
+                    for your farm.</p>
 
-            <form class="booking-form" action="#" method="POST"
-                onsubmit="event.preventDefault(); alert(translations[localStorage.getItem('manakrishi_lang') || 'en']['alert-booked']);">
-                <div class="form-group">
-                    <label for="fullname" data-i18n="lbl-fullname">Full Name</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required
-                        class="form-input" data-i18n="ph-fullname">
+                <form class="booking-form" action="#" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="fullname" data-i18n="lbl-fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required
+                            class="form-input" data-i18n="ph-fullname">
+                        <small class="error-msg">Please enter your name</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile" data-i18n="lbl-mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="Enter 10-digit mobile number"
+                            maxlength="10" required class="form-input" data-i18n="ph-mobile">
+                        <small class="error-msg">Please enter a valid 10-digit number</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="village" data-i18n="lbl-village">Village / Location</label>
+                        <input type="text" id="village" name="village" placeholder="Enter your village name" required
+                            class="form-input" data-i18n="ph-village">
+                        <small class="error-msg">Please enter your village</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="crop" data-i18n="lbl-crop">Crop Type</label>
+                        <input type="text" id="crop" name="crop" placeholder="E.g., Paddy, Cotton, Chilli" required
+                            class="form-input" data-i18n="ph-crop">
+                        <small class="error-msg">Please specify the crop</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="acres" data-i18n="lbl-acres">Total Acres</label>
+                        <input type="number" id="acres" name="acres" placeholder="Number of acres" class="form-input"
+                            data-i18n="ph-acres" min="0.5" step="0.5">
+                        <small class="error-msg">Please enter valid acreage</small>
+                    </div>
+
+                    <button type="submit" class="submit-btn" data-i18n="btn-confirm">Confirm Booking</button>
+                </form>
+            </div>
+
+            <!-- Success Message (Hidden by default) -->
+            <div class="booking-success" id="success-message">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
                 </div>
-
-                <div class="form-group">
-                    <label for="mobile" data-i18n="lbl-mobile">Mobile Number</label>
-                    <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number"
-                        pattern="[0-9]{10}" required class="form-input" data-i18n="ph-mobile">
+                <h2 class="success-title" data-i18n="success-title">Booking Confirmed!</h2>
+                <p class="success-desc" data-i18n="success-desc">We have received your request. Our team will contact
+                    you shortly.</p>
+                <div class="success-actions">
+                    <button class="submit-btn" onclick="location.reload()" data-i18n="btn-book-another">Book Another
+                        Service</button>
+                    <button class="secondary-btn" onclick="window.location.href='index.html'" data-i18n="btn-later">I
+                        will do it later</button>
                 </div>
-
-                <div class="form-group">
-                    <label for="village" data-i18n="lbl-village">Village / Location</label>
-                    <input type="text" id="village" name="village" placeholder="Enter your village name" required
-                        class="form-input" data-i18n="ph-village">
-                </div>
-
-                <div class="form-group">
-                    <label for="crop" data-i18n="lbl-crop">Crop Type</label>
-                    <input type="text" id="crop" name="crop" placeholder="E.g., Paddy, Cotton, Chilli" required
-                        class="form-input" data-i18n="ph-crop">
-                </div>
-
-                <div class="form-group">
-                    <label for="acres" data-i18n="lbl-acres">Total Acres</label>
-                    <input type="number" id="acres" name="acres" placeholder="Number of acres" class="form-input"
-                        data-i18n="ph-acres">
-                </div>
-
-                <button type="submit" class="submit-btn cta-pulse" data-i18n="btn-confirm">Confirm Booking</button>
-            </form>
+            </div>
         </div>
     </section>
 

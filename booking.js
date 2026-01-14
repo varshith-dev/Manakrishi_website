@@ -23,13 +23,78 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGHnnn6GiKYC
 
 document.addEventListener('DOMContentLoaded', () => {
     const bookingForm = document.querySelector('.booking-form');
-    // Remove the inline onsubmit
+    const bookingWrapper = document.getElementById('booking-wrapper');
+    const successMessage = document.getElementById('success-message');
+
     if (bookingForm) {
-        bookingForm.removeAttribute('onsubmit');
+        // Validation Helper
+        const showError = (input, show) => {
+            const errorMsg = input.parentElement.querySelector('.error-msg');
+            if (errorMsg) {
+                errorMsg.style.display = show ? 'block' : 'none';
+            }
+            if (show) {
+                input.classList.add('error');
+            } else {
+                input.classList.remove('error');
+            }
+        };
 
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // 1. Validation
+            let isValid = true;
+
+            // Name
+            const fullname = document.getElementById('fullname');
+            if (fullname.value.trim() === '') {
+                showError(fullname, true);
+                isValid = false;
+            } else {
+                showError(fullname, false);
+            }
+
+            // Mobile (Strict 10 digits)
+            const mobile = document.getElementById('mobile');
+            const mobileRegex = /^[0-9]{10}$/;
+            if (!mobileRegex.test(mobile.value)) {
+                showError(mobile, true);
+                isValid = false;
+            } else {
+                showError(mobile, false);
+            }
+
+            // Village
+            const village = document.getElementById('village');
+            if (village.value.trim() === '') {
+                showError(village, true);
+                isValid = false;
+            } else {
+                showError(village, false);
+            }
+
+            // Crop
+            const crop = document.getElementById('crop');
+            if (crop.value.trim() === '') {
+                showError(crop, true);
+                isValid = false;
+            } else {
+                showError(crop, false);
+            }
+
+            // Acres
+            const acres = document.getElementById('acres');
+            if (!acres.value || acres.value <= 0) {
+                showError(acres, true);
+                isValid = false;
+            } else {
+                showError(acres, false);
+            }
+
+            if (!isValid) return;
+
+            // 2. Submission
             const submitBtn = bookingForm.querySelector('.submit-btn');
             const originalBtnText = submitBtn.innerText;
             submitBtn.disabled = true;
@@ -37,25 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Get form values
             const formData = {
-                fullname: document.getElementById('fullname').value,
-                mobile: document.getElementById('mobile').value,
-                village: document.getElementById('village').value,
-                crop: document.getElementById('crop').value,
-                acres: document.getElementById('acres').value,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Compat timestamp
+                fullname: fullname.value,
+                mobile: mobile.value,
+                village: village.value,
+                crop: crop.value,
+                acres: acres.value,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 status: 'new'
             };
 
             try {
-                // 1. Add to Firebase
-                const docRef = await db.collection("bookings").add(formData);
-                console.log("Document written with ID: ", docRef.id);
+                // Add to Firebase
+                await db.collection("bookings").add(formData);
 
-                // 2. Send to Google Sheets (if URL is configured)
-                // 2. Send to Google Sheets (if URL is configured)
-                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "https://script.google.com/macros/s/AKfycbyGHnnn6GiKYCbMgraKofdbhU8ZaVMBav89Y-xKu63OLp5z-y4O1F9eDhGQ4I9Qn9do/execE") {
-
-                    // Create a clean object for the Sheet (exclude Firebase specific objects like timestamp)
+                // Send to Google Sheets (if URL is valid)
+                if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("REPLACE THIS")) {
                     const sheetData = {
                         fullname: formData.fullname,
                         mobile: formData.mobile,
@@ -64,31 +125,38 @@ document.addEventListener('DOMContentLoaded', () => {
                         acres: formData.acres
                     };
 
+                    // Fire and forget (optional)
                     fetch(GOOGLE_SCRIPT_URL, {
                         method: "POST",
                         mode: "no-cors",
-                        headers: {
-                            "Content-Type": "text/plain"
-                        },
+                        headers: { "Content-Type": "text/plain" },
                         body: JSON.stringify(sheetData)
-                    }).catch(err => console.error("Error sending to Google Sheet:", err));
+                    }).catch(err => console.log("Sheet Error (ignored):", err));
                 }
 
-                // Get success message based on language
-                const currentLang = localStorage.getItem('manakrishi_lang') || 'en';
-                const successMsg = currentLang === 'te'
-                    ? "బుకింగ్ విజయవంతమైంది! మేము త్వరలో మిమ్మల్ని సంప్రదిస్తాము."
-                    : "Booking Successful! We will contact you shortly.";
+                // Show Success UI
+                if (bookingWrapper && successMessage) {
+                    bookingWrapper.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    alert("Booking Successful!");
+                    bookingForm.reset();
+                }
 
-                alert(successMsg);
-                bookingForm.reset();
             } catch (error) {
                 console.error("Error adding document: ", error);
-                alert("Error submitting booking: " + error.message + "\n\n(Check your browser console for more details)");
+                alert("Error submitting booking. Please try again.\nDetails: " + error.message);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = originalBtnText;
             }
+        });
+
+        // Real-time validation removal on input
+        bookingForm.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                showError(input, false);
+            });
         });
     }
 });

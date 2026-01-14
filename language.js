@@ -89,7 +89,11 @@ const translations = {
         "lbl-acres": "Total Acres",
         "ph-acres": "Number of acres",
         "btn-confirm": "Confirm Booking",
-        "alert-booked": "Booking request submitted! We will contact you shortly."
+        "alert-booked": "Booking request submitted! We will contact you shortly.",
+        "success-title": "Booking Confirmed!",
+        "success-desc": "We have received your request. Our team will contact you shortly.",
+        "btn-book-another": "Book Another Service",
+        "btn-later": "I will do it later"
     },
     "te": {
         "nav-story": "మా కథ",
@@ -181,7 +185,11 @@ const translations = {
         "lbl-acres": "మొత్తం ఎకరాలు",
         "ph-acres": "ఎకరాల సంఖ్య",
         "btn-confirm": "బుకింగ్ నిర్ధారించండి",
-        "alert-booked": "బుకింగ్ అభ్యర్థన సమర్పించబడింది! మేము త్వరలో మిమ్మల్ని సంప్రదిస్తాము."
+        "alert-booked": "బుకింగ్ అభ్యర్థన సమర్పించబడింది! మేము త్వరలో మిమ్మల్ని సంప్రదిస్తాము.",
+        "success-title": "బుకింగ్ నిర్ధారించబడింది!",
+        "success-desc": "మేము మీ అభ్యర్థనను స్వీకరించాము. మా బృందం త్వరలో మిమ్మల్ని సంప్రదిస్తుంది.",
+        "btn-book-another": "మరొక సేవను బుక్ చేయండి",
+        "btn-later": "నేను తరువాత చేస్తాను"
     }
 };
 

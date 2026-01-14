@@ -1464,96 +1464,7 @@ body.light-mode .theme-btn {
     width: 100%;
 }
 
-/* Booking Page Styles */
-.booking-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 5% 50px;
-    background: url('assets/hero-bg.jpg') no-repeat center center/cover;
-    position: relative;
-    z-index: 1;
-}
 
-.booking-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 22, 16, 0.85);
-    z-index: -1;
-}
-
-.booking-container {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 3rem;
-    border-radius: 20px;
-    width: 100%;
-    max-width: 600px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-.booking-container .section-title {
-    margin-bottom: 0.5rem;
-    font-size: 2.2rem;
-    text-align: center;
-    color: #fff;
-}
-
-.booking-subtitle {
-    text-align: center;
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--color-text);
-    font-weight: 500;
-}
-
-.form-input {
-    width: 100%;
-    padding: 1rem;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: #fff;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    transition: 0.3s;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: var(--color-secondary);
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.submit-btn {
-    width: 100%;
-    margin-top: 1rem;
-    cursor: pointer;
-    background: linear-gradient(135deg, var(--color-primary), #3a7532);
-    border: none;
-    color: white;
-}
-
-.submit-btn:hover {
-    background: var(--color-secondary);
-    color: #000;
-}
 
 /* ============================
    Leadership Section
@@ -1599,10 +1510,238 @@ body.light-mode .theme-btn {
 
 .leader-row:hover {
     transform: translateX(10px);
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 10px 30px -10px rgba(0, 188, 212, 0.15);
-    border-color: rgba(0, 188, 212, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-secondary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+
+.leader-content h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.leader-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-top: 1rem;
+    line-height: 1.6;
+}
+
+/* ============================
+   Booking Page Styles
+   ============================ */
+.booking-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 5% 50px;
+    background: url('assets/hero-bg.jpg') no-repeat center center/cover;
+    position: relative;
+    z-index: 1;
+}
+
+.booking-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 22, 16, 0.9) 0%, rgba(15, 22, 16, 0.8) 100%);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.booking-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 3rem;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.booking-container .section-title {
+    margin-bottom: 0.5rem;
+    font-size: 2.2rem;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.booking-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    background: rgba(0, 188, 212, 0.05);
+    box-shadow: 0 0 0 4px rgba(0, 188, 212, 0.1);
+}
+
+.form-input.error {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.error-msg {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: none;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--color-primary), #3a7532);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #3a7532, var(--color-primary));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(45, 90, 39, 0.4);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success Message Container */
+.booking-success {
+    display: none;
+    /* Hidden by default */
+    text-align: center;
+    padding: 2rem 1rem;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.success-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.success-title {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.success-desc {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+}
+
+.success-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    border-color: var(--color-text);
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
 
 .leader-content {
     width: 100%;
