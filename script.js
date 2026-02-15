@@ -105,10 +105,26 @@ gsap.from('.reveal-text', {
 });
 
 
+// Staggered Gallery Animation
+ScrollTrigger.batch(".gallery-card", {
+    onEnter: batch => gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out",
+        overwrite: true
+    }),
+    onLeave: batch => gsap.set(batch, { opacity: 0, y: 50 }), // Optional: reset on leave
+    onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.15, overwrite: true }),
+    onLeaveBack: batch => gsap.set(batch, { opacity: 0, y: 50 }), // Optional: reset on leave
+    // Initial state set via CSS or immediate set
+});
 
+// Ensure initial state is hidden for animation to work
+gsap.set(".gallery-card", { y: 50, opacity: 0 });
 
-
-// 3. Impact Counters
+// Counter Animation Logic
 const counters = document.querySelectorAll('.counter');
 counters.forEach(counter => {
     const target = +counter.getAttribute('data-target');

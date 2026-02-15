@@ -296,8 +296,8 @@ a {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* Use the uploaded real-world image */
-    background: url('assets/hero-bg.jpg') no-repeat center 15%/cover;
+    /* Realistic farm field (fallback when slider not visible) */
+    background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200') no-repeat center 15%/cover;
     background-attachment: fixed;
     /* Parallax feel */
 }
@@ -674,7 +674,7 @@ a {
     padding: 8rem 5%;
     text-align: center;
     position: relative;
-    background: url('assets/tech-bg.png') no-repeat center center/cover;
+    background: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200') no-repeat center center/cover;
     background-attachment: fixed;
     /* Parallax effect */
     z-index: 1;
@@ -1345,9 +1345,9 @@ a {
 .vision-section {
     padding: 8rem 5%;
     position: relative;
-    /* Dark overlay + AI Background Image */
+    /* Dark overlay + realistic agriculture background */
     background: linear-gradient(180deg, rgba(5, 8, 5, 0.9) 0%, rgba(15, 22, 16, 0.85) 50%, rgba(26, 51, 42, 0.9) 100%),
-        url('assets/vision-bg.png') no-repeat center center/cover;
+        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200') no-repeat center center/cover;
     background-attachment: fixed;
     overflow: hidden;
 }
@@ -1672,7 +1672,7 @@ a {
     align-items: center;
     justify-content: center;
     padding: 120px 5% 50px;
-    background: url('assets/hero-bg.jpg') no-repeat center center/cover;
+    background: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=1200') no-repeat center center/cover;
     position: relative;
     z-index: 1;
 }
