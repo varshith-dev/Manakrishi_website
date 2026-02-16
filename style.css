@@ -670,27 +670,7 @@ a {
     text-align: center;
 }
 
-.tech-section {
-    padding: 8rem 5%;
-    text-align: center;
-    position: relative;
-    background: url('assets/tech-bg.png') no-repeat center center/cover;
-    background-attachment: fixed;
-    /* Parallax effect */
-    z-index: 1;
-}
 
-.tech-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 22, 16, 0.85);
-    /* Dark overlay for readability */
-    z-index: -1;
-}
 
 .section-title {
     font-size: 2.8rem;
@@ -943,73 +923,7 @@ a {
     z-index: 2;
 }
 
-/* Technology */
-.tech-interface {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-}
 
-.tech-center {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #00bcd433 0%, transparent 70%);
-    border-radius: 50%;
-    border: 1px dashed var(--color-secondary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: rotate 20s linear infinite;
-}
-
-
-.ai-core-wrapper {
-    width: 250px;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.core-svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 20px rgba(0, 188, 212, 0.4));
-}
-
-.hud-element {
-    background: rgba(13, 20, 16, 0.6);
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--color-secondary);
-    padding: 1.5rem;
-    width: 220px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 188, 212, 0.1);
-}
-
-.hud-element h4 {
-    margin-bottom: 1rem;
-    color: var(--color-secondary);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
-.tech-svg {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
-    margin: 0.5rem 0;
-}
-
-.tech-detail {
-    font-size: 0.8rem;
-    color: #888;
-    margin-top: 0.5rem;
-}
 
 /* Visionaries & Partners (Team) */
 .team-section {
@@ -1484,10 +1398,7 @@ a {
         font-size: 2.5rem;
     }
 
-    .tech-interface {
-        flex-direction: column;
-        gap: 2rem;
-    }
+
 }
 
 /* Vision & Mission Section */

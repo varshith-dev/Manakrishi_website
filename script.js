@@ -55,16 +55,7 @@ counters.forEach(counter => {
 });
 
 // 4. Tech Section Reveal
-gsap.from('.hud-element', {
-    scrollTrigger: {
-        trigger: '#technology',
-        start: "top 60%"
-    },
-    x: (i) => i === 0 ? -100 : 100,
-    opacity: 0,
-    duration: 1,
-    stagger: 0.2
-});
+
 
 // 5. Landing Drone Animation - Removed
 

@@ -2,7 +2,6 @@ const translations = {
     "en": {
         "nav-story": "Our Story",
         "nav-how": "How It Works",
-        "nav-tech": "Technology",
         "nav-impact": "Impact",
         "nav-contact": "Join the Revolution",
         "nav-booking-contact": "Contact Us",
@@ -44,11 +43,7 @@ const translations = {
         "step-4-h": "4. Growth & Yield",
         "step-4-p": "Healthier crops, higher profits.",
 
-        "tech-title": "Behind the Intelligence",
-        "tech-sensor-h": "Sensor Array",
-        "tech-sensor-p": "Multispectral Imaging",
-        "tech-spray-h": "Spray Efficiency",
-        "tech-spray-p": "Navigate & distribute",
+
 
         "schemes-title": "Security & Support for Every Farmer",
         "scheme-1-h": "Secure Your Future",
@@ -111,7 +106,6 @@ const translations = {
     "te": {
         "nav-story": "మా కథ",
         "nav-how": "ఇది ఎలా పనిచేస్తుంది",
-        "nav-tech": "సాంకేతికత",
         "nav-impact": "ప్రభావం",
         "nav-contact": "మమ్మల్ని చేరండి",
         "nav-booking-contact": "మమ్మల్ని సంప్రదించండి",
@@ -153,11 +147,7 @@ const translations = {
         "step-4-h": "4. పెరుగుదల & దిగుబడి",
         "step-4-p": "ఆరోగ్యకరమైన పంటలు, అధిక లాభాలు.",
 
-        "tech-title": "మేధస్సు వెనుక",
-        "tech-sensor-h": "సెన్సార్ అమరిక",
-        "tech-sensor-p": "మల్టీస్పెక్ట్రల్ ఇమేజింగ్",
-        "tech-spray-h": "స్ప్రే సామర్థ్యం",
-        "tech-spray-p": "నావిగేట్ & పంపిణీ",
+
 
         "schemes-title": "ప్రతి రైతుకు భద్రత & మద్దతు",
         "scheme-1-h": "మీ భవిష్యత్తును సురక్షితం చేసుకోండి",
