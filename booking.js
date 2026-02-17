@@ -1,4 +1,3 @@
-
 // Firebase Configuration (Compat)
 const firebaseConfig = {
     apiKey: "AIzaSyBy2yNoxRWj0fR5_3zXWZoi7xwrusHBf9U",
@@ -10,153 +9,155 @@ const firebaseConfig = {
     measurementId: "G-246CVYV263"
 };
 
-// Initialize Firebase (Compat)
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
-// Initialize Firestore
 const db = firebase.firestore();
-
-// TODO: REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGHnnn6GiKYCbMgraKofdbhU8ZaVMBav89Y-xKu63OLp5z-y4O1F9eDhGQ4I9Qn9do/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
     const bookingForm = document.querySelector('.booking-form');
     const bookingWrapper = document.getElementById('booking-wrapper');
     const successMessage = document.getElementById('success-message');
+    const bookingNav = document.getElementById('booking-nav');
 
-    if (bookingForm) {
-        // Validation Helper
-        const showError = (input, show) => {
-            const errorMsg = input.parentElement.querySelector('.error-msg');
-            if (errorMsg) {
-                errorMsg.style.display = show ? 'block' : 'none';
-            }
-            if (show) {
-                input.classList.add('error');
+    if (bookingNav) {
+        const onScroll = () => bookingNav.classList.toggle('scrolled', window.scrollY > 20);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    if (!bookingForm) return;
+
+    const submitBtn = bookingForm.querySelector('.submit-btn');
+    const submitBtnText = submitBtn && submitBtn.querySelector('.submit-btn-text');
+
+    const showError = (input, show) => {
+        if (!input) return;
+        const errorMsg = input.closest('.form-group') && input.closest('.form-group').querySelector('.error-msg');
+        if (errorMsg) errorMsg.style.display = show ? 'block' : 'none';
+        input.classList.toggle('error', show);
+    };
+
+    const setLoading = (loading) => {
+        if (!submitBtn) return;
+        submitBtn.disabled = loading;
+        submitBtn.classList.toggle('is-loading', loading);
+        if (submitBtnText) {
+            if (loading) {
+                submitBtn.dataset.originalBtnText = submitBtnText.textContent;
+                submitBtnText.textContent = 'Processing...';
             } else {
-                input.classList.remove('error');
+                submitBtnText.textContent = submitBtn.dataset.originalBtnText || 'Confirm Booking';
             }
+        }
+    };
+
+    const showSuccess = () => {
+        if (!bookingWrapper || !successMessage) return;
+        bookingWrapper.style.display = 'none';
+        successMessage.style.display = 'block';
+        successMessage.classList.add('is-visible');
+        successMessage.setAttribute('aria-hidden', 'false');
+    };
+
+    const fields = {
+        fullname: document.getElementById('fullname'),
+        mobile: document.getElementById('mobile'),
+        village: document.getElementById('village'),
+        crop: document.getElementById('crop'),
+        acres: document.getElementById('acres')
+    };
+
+    bookingForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Trim and validate
+        let isValid = true;
+        let firstInvalid = null;
+
+        if (!fields.fullname || !fields.fullname.value.trim()) {
+            showError(fields.fullname, true);
+            if (!firstInvalid) firstInvalid = fields.fullname;
+            isValid = false;
+        } else showError(fields.fullname, false);
+
+        const mobileRegex = /^[6-9][0-9]{9}$/;
+        if (!fields.mobile || !mobileRegex.test(fields.mobile.value.trim())) {
+            showError(fields.mobile, true);
+            if (!firstInvalid) firstInvalid = fields.mobile;
+            isValid = false;
+        } else showError(fields.mobile, false);
+
+        if (!fields.village || !fields.village.value.trim()) {
+            showError(fields.village, true);
+            if (!firstInvalid) firstInvalid = fields.village;
+            isValid = false;
+        } else showError(fields.village, false);
+
+        if (!fields.crop || !fields.crop.value.trim()) {
+            showError(fields.crop, true);
+            if (!firstInvalid) firstInvalid = fields.crop;
+            isValid = false;
+        } else showError(fields.crop, false);
+
+        const acresNum = fields.acres ? parseFloat(fields.acres.value, 10) : 0;
+        if (!fields.acres || !fields.acres.value.trim() || isNaN(acresNum) || acresNum < 0.5) {
+            showError(fields.acres, true);
+            if (!firstInvalid) firstInvalid = fields.acres;
+            isValid = false;
+        } else showError(fields.acres, false);
+
+        if (!isValid) {
+            if (firstInvalid) {
+                firstInvalid.focus();
+                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
+        setLoading(true);
+
+        const formData = {
+            fullname: fields.fullname.value.trim(),
+            mobile: fields.mobile.value.trim(),
+            village: fields.village.value.trim(),
+            crop: fields.crop.value.trim(),
+            acres: fields.acres.value.trim(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            status: 'new'
         };
 
-        bookingForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+        try {
+            await db.collection("bookings").add(formData);
 
-            // 1. Validation
-            let isValid = true;
-
-            // Name
-            const fullname = document.getElementById('fullname');
-            if (fullname.value.trim() === '') {
-                showError(fullname, true);
-                isValid = false;
-            } else {
-                showError(fullname, false);
-            }
-
-            // Mobile (Strict 10 digits)
-            const mobile = document.getElementById('mobile');
-            const mobileRegex = /^[0-9]{10}$/;
-            if (!mobileRegex.test(mobile.value)) {
-                showError(mobile, true);
-                isValid = false;
-            } else {
-                showError(mobile, false);
-            }
-
-            // Village
-            const village = document.getElementById('village');
-            if (village.value.trim() === '') {
-                showError(village, true);
-                isValid = false;
-            } else {
-                showError(village, false);
-            }
-
-            // Crop
-            const crop = document.getElementById('crop');
-            if (crop.value.trim() === '') {
-                showError(crop, true);
-                isValid = false;
-            } else {
-                showError(crop, false);
-            }
-
-            // Acres
-            const acres = document.getElementById('acres');
-            if (!acres.value || acres.value <= 0) {
-                showError(acres, true);
-                isValid = false;
-            } else {
-                showError(acres, false);
-            }
-
-            if (!isValid) return;
-
-            // 2. Submission
-            const submitBtn = bookingForm.querySelector('.submit-btn');
-            const originalBtnText = submitBtn.innerText;
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Processing...";
-
-            // Get form values
-            const formData = {
-                fullname: fullname.value,
-                mobile: mobile.value,
-                village: village.value,
-                crop: crop.value,
-                acres: acres.value,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                status: 'new'
-            };
-
-            try {
-                // Add to Firebase
-                await db.collection("bookings").add(formData);
-
-                // Send to Google Sheets (if URL is valid)
-                if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("REPLACE THIS")) {
-                    const sheetData = {
+            if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes("REPLACE THIS")) {
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "text/plain" },
+                    body: JSON.stringify({
                         fullname: formData.fullname,
                         mobile: formData.mobile,
                         village: formData.village,
                         crop: formData.crop,
                         acres: formData.acres
-                    };
-
-                    // Fire and forget (optional)
-                    fetch(GOOGLE_SCRIPT_URL, {
-                        method: "POST",
-                        mode: "no-cors",
-                        headers: { "Content-Type": "text/plain" },
-                        body: JSON.stringify(sheetData)
-                    }).catch(err => console.log("Sheet Error (ignored):", err));
-                }
-
-                // Show Success UI
-                if (bookingWrapper && successMessage) {
-                    bookingWrapper.style.display = 'none';
-                    successMessage.style.display = 'block';
-                } else {
-                    alert("Booking Successful!");
-                    bookingForm.reset();
-                }
-
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                alert("Error submitting booking. Please try again.\nDetails: " + error.message);
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = originalBtnText;
+                    })
+                }).catch(() => {});
             }
-        });
 
-        // Real-time validation removal on input
-        bookingForm.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', () => {
-                showError(input, false);
-            });
-        });
-    }
+            showSuccess();
+        } catch (error) {
+            console.error("Booking error:", error);
+            alert("Error submitting booking. Please try again.\n" + (error.message || ""));
+        } finally {
+            setLoading(false);
+        }
+    });
+
+    bookingForm.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => showError(input, false));
+        input.addEventListener('focus', () => showError(input, false));
+    });
 });

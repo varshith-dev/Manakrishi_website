@@ -33,6 +33,20 @@ ScrollTrigger.batch(".gallery-card", {
 
 // Ensure initial state is hidden for animation to work
 gsap.set(".gallery-card", { y: 50, opacity: 0 });
+gsap.set(".feedback-card", { y: 50, opacity: 0 });
+
+// Feedback Animation
+ScrollTrigger.batch(".feedback-card", {
+    onEnter: batch => gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out",
+        overwrite: true
+    }),
+    start: "top 85%"
+});
 
 // Counter Animation Logic
 const counters = document.querySelectorAll('.counter');
@@ -61,24 +75,62 @@ counters.forEach(counter => {
 
 
 // 6. Newsletter Form Handling
+// 6. Newsletter Form Handling
 const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const btn = newsletterForm.querySelector('button');
+        const input = newsletterForm.querySelector('input');
         const originalContent = btn.innerHTML;
 
-        // Visual feedback
-        btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-        btn.style.backgroundColor = '#4caf50';
+        // Simulate loading
+        btn.innerHTML = '<div class="spinner"></div>';
+        input.disabled = true;
+        btn.disabled = true;
+        btn.style.pointerEvents = 'none';
 
-        // Reset after a few seconds
+        // Simulate API call
         setTimeout(() => {
-            btn.innerHTML = originalContent;
-            btn.style.backgroundColor = '';
-            newsletterForm.reset();
-        }, 3000);
+            // Success State
+            btn.innerHTML = '<svg className="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            btn.style.backgroundColor = '#4caf50';
+            btn.style.boxShadow = '0 0 15px rgba(76, 175, 80, 0.5)';
+            input.value = 'Subscribed!';
+            input.style.textAlign = 'center';
+
+            setTimeout(() => {
+                // Reset
+                btn.innerHTML = originalContent;
+                btn.style.backgroundColor = '';
+                btn.style.boxShadow = '';
+                btn.style.pointerEvents = '';
+                input.value = '';
+                input.style.textAlign = '';
+                input.disabled = false;
+                btn.disabled = false;
+            }, 3000);
+        }, 1500);
     });
+
+    // Add dynamic styles for spinner
+    if (!document.getElementById('newsletter-styles')) {
+        const style = document.createElement('style');
+        style.id = 'newsletter-styles';
+        style.textContent = `
+            @keyframes spin { to { transform: rotate(360deg); } }
+            .spinner {
+                width: 18px; 
+                height: 18px; 
+                border: 2px solid rgba(255,255,255,0.3); 
+                border-radius: 50%; 
+                border-top-color: #fff; 
+                animation: spin 0.8s linear infinite;
+                margin: 0 auto;
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 // 7. Theme Toggle Logic
 const themeBtn = document.getElementById('theme-toggle');
@@ -146,37 +198,105 @@ gsap.from('.leader-row', {
 });
 */
 
-// 11. Service Modal Logic
+// 11. Service Modal Logic (GSAP + focus trap + a11y)
 const serviceFab = document.getElementById('service-fab');
 const serviceModal = document.getElementById('service-modal');
 const modalClose = document.querySelector('.modal-close');
 const modalOverlay = document.querySelector('.modal-overlay');
+const modalContent = document.querySelector('#service-modal .modal-content');
+const modalItems = document.querySelectorAll('#service-modal .modal-item');
+const modalSubtitle = document.querySelector('#service-modal .modal-subtitle');
+const modalCta = document.querySelector('#service-modal .modal-cta-btn');
+
+const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+function getFocusables(container) {
+    if (!container) return [];
+    return Array.from(container.querySelectorAll(FOCUSABLE)).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+}
+
+function openServiceModal() {
+    if (!serviceModal) return;
+    if (serviceModal.classList.contains('active')) return; // prevent double-open
+    const previouslyFocused = document.activeElement;
+    serviceModal.dataset.previousFocus = previouslyFocused && previouslyFocused.id ? previouslyFocused.id : '';
+    serviceModal.classList.add('active');
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+
+    if (typeof gsap !== 'undefined') {
+        gsap.fromTo(serviceModal, { opacity: 0 }, { opacity: 1, duration: 0.28, ease: 'power2.out' });
+        if (modalContent) {
+            gsap.fromTo(modalContent, { scale: 0.9, y: 30 }, { scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.15)' });
+        }
+        if (modalSubtitle) {
+            gsap.fromTo(modalSubtitle, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, delay: 0.1, ease: 'power2.out' });
+        }
+        if (modalItems.length) {
+            gsap.fromTo(modalItems, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.07, delay: 0.12, ease: 'power2.out' });
+        }
+        if (modalCta) {
+            gsap.fromTo(modalCta, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, delay: 0.45, ease: 'power2.out' });
+        }
+    }
+
+    requestAnimationFrame(() => {
+        const focusables = getFocusables(modalContent || serviceModal);
+        if (focusables.length) focusables[0].focus();
+    });
+}
+
+function closeServiceModal() {
+    if (!serviceModal || !serviceModal.classList.contains('active')) return;
+
+    function finishClose() {
+        serviceModal.classList.remove('active');
+        serviceModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        if (modalContent && typeof gsap !== 'undefined') gsap.set(modalContent, { clearProps: 'all' });
+        const prevId = serviceModal.dataset.previousFocus;
+        if (prevId && document.getElementById(prevId)) document.getElementById(prevId).focus();
+        else if (serviceFab) serviceFab.focus();
+    }
+
+    if (typeof gsap !== 'undefined' && modalContent) {
+        gsap.timeline({ onComplete: finishClose })
+            .to(modalContent, { scale: 0.95, y: 12, opacity: 0.9, duration: 0.15, ease: 'power2.in' }, 0)
+            .to(serviceModal, { opacity: 0, duration: 0.2, ease: 'power2.in' }, 0.05);
+    } else {
+        finishClose();
+    }
+}
 
 if (serviceFab && serviceModal) {
-    serviceFab.addEventListener('click', () => {
-        serviceModal.classList.add('active');
-        // Prevent body scroll when modal is open
-        document.body.style.overflow = 'hidden';
-    });
-
-    const closeModal = () => {
-        serviceModal.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-
-    modalClose.addEventListener('click', closeModal);
-
-    // Close on click outside
+    serviceFab.addEventListener('click', openServiceModal);
+    if (modalClose) modalClose.addEventListener('click', closeServiceModal);
     modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-            closeModal();
+        if (e.target === modalOverlay) closeServiceModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
+            e.preventDefault();
+            closeServiceModal();
         }
     });
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
-            closeModal();
+    serviceModal.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || !serviceModal.classList.contains('active')) return;
+        const focusables = getFocusables(modalContent || serviceModal);
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         }
     });
 }

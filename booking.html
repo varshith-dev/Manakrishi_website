@@ -36,24 +36,27 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="glass-nav">
-        <div class="logo" onclick="window.location.href='index.html'"><img src="assets/manakrishi-logo.png"
-                alt="Manakrishi Logo"></div>
-        <div class="nav-links">
-            <a href="index.html" data-i18n="nav-home">Home</a>
-            <a href="index.html#story" data-i18n="nav-story">Our Story</a>
-            <a href="index.html#how-it-works" data-i18n="nav-how">How It Works</a>
-        </div>
-        <div class="nav-actions">
-            <!-- Theme Toggle can remain if JS supports it on this page, simplified for now -->
-            <button class="cta-small" onclick="toggleLanguage()" id="lang-btn"
-                style="background: transparent; border: 1px solid var(--color-secondary); color: var(--color-secondary);">
-                <span id="lang-btn-text">తెలుగు</span>
-            </button>
-            <a href="https://wa.me/918886124318" target="_blank" class="cta-small"
-                data-i18n="nav-booking-contact">Contact Us</a>
-        </div>
-    </nav>
+    <header class="booking-header">
+        <nav class="glass-nav booking-nav" id="booking-nav">
+            <div class="glass-nav-brand">
+                <a href="index.html" class="logo" aria-label="Manakrishi Home">
+                    <img src="assets/manakrishi-logo.png" alt="Manakrishi">
+                </a>
+                <span class="booking-nav-badge">Book</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" data-i18n="nav-home">Home</a>
+                <a href="index.html#about" data-i18n="nav-story">Our Story</a>
+                <a href="index.html#how-it-works" data-i18n="nav-how">How It Works</a>
+            </div>
+            <div class="nav-actions">
+                <button type="button" class="cta-small cta-lang" onclick="toggleLanguage()" id="lang-btn" aria-label="Toggle language">
+                    <span id="lang-btn-text">తెలుగు</span>
+                </button>
+                <a href="https://wa.me/918886124318" target="_blank" rel="noopener noreferrer" class="cta-small cta-contact" data-i18n="nav-booking-contact">Contact Us</a>
+            </div>
+        </nav>
+    </header>
 
     <!-- Booking Form Section -->
     <section class="booking-section">
@@ -99,12 +102,12 @@
                         <small class="error-msg">Please enter valid acreage</small>
                     </div>
 
-                    <button type="submit" class="submit-btn" data-i18n="btn-confirm">Confirm Booking</button>
+                    <button type="submit" class="submit-btn"><span class="submit-btn-text" data-i18n="btn-confirm">Confirm Booking</span></button>
                 </form>
             </div>
 
             <!-- Success Message (Hidden by default) -->
-            <div class="booking-success" id="success-message">
+            <div class="booking-success" id="success-message" aria-live="polite">
                 <div class="success-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
                         stroke-linejoin="round">
