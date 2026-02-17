@@ -84,6 +84,30 @@ const translations = {
         "footer-rights": "© 2026 Manakrishi Technologies. All rights reserved.",
 
         /* Booking Page */
+        "gallery-badge": "Operations",
+        "gallery-desc": "Our expert pilots operate across diverse terrains and crop types, delivering precision results every time.",
+        "hiw-subtitle": "From booking to harvest, we ensure a seamless, high-tech experience.",
+
+        "feedback-title": "Trusted by Farmers",
+        "feedback-2-text": "Thanks to Manakrishi, we've reduced our input costs while improving crop health. Their team is truly dedicated to farmer success.",
+        "feedback-2-name": "Krishna & Team",
+        "feedback-2-loc": "Warangal",
+        "feedback-3-text": "Using Manakrishi's drone service was the best decision for my farm. The precision spray saved me so much time and money.",
+        "feedback-3-name": "Srinivas Rao",
+        "feedback-3-loc": "Khammam",
+
+        "modal-title": "Our Services",
+        "modal-drone-h": "Drone Spraying",
+        "modal-drone-p": "Precision application of pesticides and fertilizers.",
+        "modal-insurance-h": "Insurance (Coming Soon)",
+        "modal-insurance-p": "Protect your harvest against unforeseen risks.",
+        "modal-field-h": "Field Analysis",
+        "modal-field-p": "Detailed field health reports for better yield.",
+        "modal-water-h": "Irrigation Planning",
+        "modal-water-p": "Water management strategies for efficiency.",
+        "fab-services": "Services",
+        "newsletter-placeholder": "Your email address",
+
         "book-title": "Book Drone Spraying",
         "book-subtitle": "Fill in the details below to schedule a service for your farm.",
         "lbl-fullname": "Full Name",
@@ -127,14 +151,21 @@ const translations = {
         "story-3-p": "యూరియా మరియు నీటి సూక్ష్మ మోతాదులు సరిగ్గా అవసరమైన చోట మోహరించబడతాయి. వృధా లేదు.",
 
         "hiw-title": "మేధస్సు యొక్క చక్రం",
+        "hiw-subtitle": "బుకింగ్ నుండి పంట కోత వరకు, మేము అతుకులు లేని, హైటెక్ అనుభవాన్ని అందిస్తాము.",
+
         "step-1-h": "1. రైతు అభ్యర్థన",
         "step-1-p": "మనకృషి యాప్ ద్వారా సులభమైన బుకింగ్.",
         "step-2-h": "2. డ్రోన్ బయలుదేరుతుంది",
 
         "gallery-title": "క్షేత్ర కార్యకలాపాలు (Field Operations)",
+        "gallery-badge": "కార్యకలాపాలు",
+        "gallery-desc": "మా నిపుణులైన పైలట్లు విభిన్న భూభాగాలు మరియు పంట రకాల్లో పనిచేస్తారు, ప్రతిసారీ ఖచ్చితమైన ఫలితాలను అందిస్తారు.",
         "gallery-chilli": "మిరప (Chilli)",
         "gallery-cotton": "పత్తి (Cotton)",
         "gallery-sugarcane": "చెరకు (Sugar Cane)",
+        "gallery-maize": " మొక్కజొన్న (Maize)",
+        "gallery-orchard": "తోటలు (Orchards)",
+        "gallery-paddy": "వరి (Paddy)",
 
         "about-title": "మనకృషి గురించి",
         "about-desc": "ప్రతి రైతు ముంగిట ఖచ్చితమైన డ్రోన్ స్ప్రేయింగ్ సేవలను తీసుకురావడం ద్వారా మనకృషి వ్యవసాయంలో విప్లవాత్మక మార్పులు చేస్తోంది. ఎరువులు మరియు పురుగుమందులను సమర్థవంతంగా పిచికారీ చేయడానికి, వృధాను తగ్గించడానికి మరియు భద్రతను నిర్ధారించడానికి మేము నిపుణులైన వ్యవసాయ శాస్త్రంతో అధునాతన డ్రోన్ సాంకేతికతను మిళితం చేస్తాము. స్మార్ట్ వ్యవసాయాన్ని అందరికీ అందుబాటులో, సరసమైన మరియు స్థిరమైనదిగా చేయడమే మా లక్ష్యం.",
@@ -150,6 +181,19 @@ const translations = {
         "step-4-p": "ఆరోగ్యకరమైన పంటలు, అధిక లాభాలు.",
 
 
+        "crops-title": "మేము అందించే పంటలు - ఖచ్చితమైన స్ప్రేయింగ్",
+        "crop-paddy-h": "వరి (Paddy)",
+        "crop-paddy-p": "నీరు నిలిచిన పొలాల్లో కూడా పోషకాల ఏకరీతి పంపిణీని నిర్ధారిస్తుంది.",
+        "crop-maize-h": "మొక్కజొన్న (Maize)",
+        "crop-maize-p": "ఎత్తైన పంటలను సమర్థవంతమైన తెగులు నియంత్రణ కోసం సులభంగా చేరుకుంటుంది.",
+        "crop-chilli-h": "మిరప (Chilli)",
+        "crop-chilli-p": "సున్నితమైన సుగంధ ద్రవ్య పంటలను తెగుళ్ల నుండి సున్నితమైన స్ప్రేయింగ్‌తో రక్షిస్తుంది.",
+        "crop-cotton-h": "పత్తి (Cotton)",
+        "crop-cotton-p": "కాయతొలుచు పురుగుల కోసం ఖచ్చితమైన లక్ష్యం మరియు మెరుగైన ఫైబర్ దిగుబడి.",
+        "crop-sugar-h": "చెరకు (Sugarcane)",
+        "crop-sugar-p": "లోతైన వేరు నుండి చివర వరకు కవరేజీని నిర్ధారించడానికి దట్టమైన పందిరిని చొచ్చుకుపోతుంది.",
+        "crop-orchard-h": "తోటలు (Orchards)",
+        "crop-orchard-p": "మామిడి, నిమ్మ మరియు ఇతర అధిక-విలువ పండ్ల చెట్ల కోసం సమర్థవంతమైన స్ప్రేయింగ్.",
 
         "schemes-title": "ప్రతి రైతుకు భద్రత & మద్దతు",
         "scheme-1-h": "మీ భవిష్యత్తును సురక్షితం చేసుకోండి",
@@ -189,7 +233,29 @@ const translations = {
         "footer-newsletter-p": "వ్యవసాయ మేధస్సు, అందించబడింది.",
         "footer-rights": "© 2026 మనకృషి టెక్నాలజీస్. సర్వహక్కులు ప్రత్యేకించబడ్డాయి.",
 
-        /* Booking Page */
+        "feedback-title": "రైతుల నమ్మకం",
+        "feedback-1-text": "\"మనకృషి డ్రోన్ టెక్నాలజీ మనం వ్యవసాయం చేసే విధానాన్ని పూర్తిగా మార్చేసింది. ఇది వేగంగా, చౌకగా మరియు సురక్షితంగా ఉంది.\"",
+        "feedback-1-name": "రమేష్ రెడ్డి",
+        "feedback-1-loc": "తెలంగాణ",
+        "feedback-2-text": "\"మనకృషితో, మేము పంట ఆరోగ్యాన్ని మెరుగుపరుస్తూ పెట్టుబడి ఖర్చులను తగ్గించుకున్నాము. వారి బృందం రైతు విజయం కోసం నిజంగా అంకితమైంది.\"",
+        "feedback-2-name": "కృష్ణ మరియు బృందం",
+        "feedback-2-loc": "వరంగల్",
+        "feedback-3-text": "\"మనకృషి డ్రోన్ సేవను ఉపయోగించడం నా పొలానికి ఉత్తమ నిర్ణయం. ఖచ్చితమైన స్ప్రే నాకు చాలా సమయం మరియు డబ్బు ఆదా చేసింది.\"",
+        "feedback-3-name": "శ్రీనివాస్ రావు",
+        "feedback-3-loc": "ఖమ్మం",
+
+        "modal-title": "మా సేవలు",
+        "modal-drone-h": "డ్రోన్ స్ప్రేయింగ్",
+        "modal-drone-p": "పురుగుమందులు మరియు ఎరువుల ఖచ్చితమైన అప్లికేషన్.",
+        "modal-insurance-h": "భీమా (త్వరలో వస్తుంది)",
+        "modal-insurance-p": "ఊహించని నష్టాల నుండి మీ పంటను రక్షించుకోండి.",
+        "modal-field-h": "క్షేత్ర విశ్లేషణ",
+        "modal-field-p": "మెరుగైన దిగుబడి కోసం క్షేత్ర ఆరోగ్య నివేదికలు.",
+        "modal-water-h": "నీటిపారుదల ప్రణాళిక",
+        "modal-water-p": "సామర్థ్యం కోసం నీటి నిర్వహణ వ్యూహాలు.",
+        "fab-services": "సేవలు",
+        "newsletter-placeholder": "మీ ఇమెయిల్ చిరునామా",
+
         "book-title": "డ్రోన్ స్ప్రేయింగ్ బుక్ చేయండి",
         "book-subtitle": "మీ పొలానికి సేవను షెడ్యూల్ చేయడానికి క్రింది వివరాలను పూరించండి.",
         "lbl-fullname": "పూర్తి పేరు",

@@ -2502,156 +2502,173 @@ body.light-mode .service-fab:hover {
 }
 
 /* Modal Content - glass card */
+/* Modal Content - Premium Glass Card */
 .modal-content {
-    background: linear-gradient(145deg, rgba(18, 28, 18, 0.97) 0%, rgba(12, 20, 12, 0.98) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 2.5rem 3rem;
-    border-radius: 24px;
+    background: rgba(18, 28, 18, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 28px;
     width: 100%;
-    max-width: 860px;
-    max-height: calc(100vh - 3rem);
+    max-width: 900px;
+    max-height: calc(100vh - 4rem);
     position: relative;
-    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.6),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     overflow-y: auto;
+    transform-origin: center center;
 }
 
 body.light-mode .modal-content {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 252, 248, 0.99) 100%);
-    border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 40px 80px -12px rgba(0, 0, 0, 0.15);
 }
 
 .modal-close {
     position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    width: 44px;
-    height: 44px;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
     color: var(--color-text-muted);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition: color 0.2s, background 0.2s, transform 0.2s;
-    line-height: 1;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
 }
 
 .modal-close:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.12);
-}
-
-.modal-close:focus-visible {
-    outline: 2px solid var(--color-secondary);
-    outline-offset: 2px;
-}
-
-body.light-mode .modal-close {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.08);
-}
-
-body.light-mode .modal-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.15);
+    transform: rotate(90deg) scale(1.1);
+    border-color: var(--color-secondary);
 }
 
 .modal-title {
     text-align: center;
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    padding-right: 3rem;
-    background: linear-gradient(90deg, #fff 0%, var(--color-secondary) 100%);
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, var(--color-secondary) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
+    position: relative;
 }
 
-body.light-mode .modal-title {
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.modal-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--color-secondary);
+    border-radius: 2px;
 }
 
-/* Modal Grid - 2x2 on desktop */
+/* Modal Grid */
 .modal-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
 /* Service cards */
 .modal-item {
-    background: rgba(255, 255, 255, 0.04);
-    padding: 1.75rem 1.5rem;
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 20px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 188, 212, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
 }
 
 .modal-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-6px);
-    border-color: rgba(0, 188, 212, 0.25);
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.3);
-}
-
-.modal-item:focus-within {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-8px);
     border-color: var(--color-secondary);
-    box-shadow: 0 0 0 1px var(--color-secondary);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 188, 212, 0.1);
 }
 
-body.light-mode .modal-item {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.06);
+.modal-item:hover::before {
+    opacity: 1;
 }
 
-body.light-mode .modal-item:hover {
-    background: rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 188, 212, 0.25);
+.modal-item.coming-soon {
+    opacity: 0.7;
+    border-style: dashed;
+}
+
+.modal-item.coming-soon::after {
+    content: 'Coming Soon';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 179, 0, 0.2);
+    color: var(--color-accent);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 179, 0, 0.3);
 }
 
 .modal-icon {
-    font-size: 2.75rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modal-item:hover .modal-icon {
-    transform: scale(1.15) translateY(-2px);
+    transform: scale(1.2) rotate(5deg);
 }
 
 .modal-item h3 {
-    color: var(--color-secondary);
-    margin-bottom: 0.5rem;
-    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
     font-weight: 700;
-}
-
-body.light-mode .modal-item h3 {
-    color: var(--color-primary);
+    position: relative;
+    z-index: 1;
 }
 
 .modal-item p {
     color: var(--color-text-muted);
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-size: 0.95rem;
+    line-height: 1.6;
     margin: 0;
-}
-
-body.light-mode .modal-item p {
-    color: var(--color-text-muted);
+    position: relative;
+    z-index: 1;
 }
 
 /* Modal CTA strip (optional - keep layout clean) */
@@ -2846,4 +2863,61 @@ body.light-mode .modal-item p {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+/* CTA Highlight Button - Premium Single Color Style */
+.cta-highlight {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 48px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    /* White text for contrast */
+    background: var(--color-primary);
+    /* Single solid brand color */
+    border-radius: 50px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 30px -10px rgba(46, 125, 50, 0.6);
+    /* Soft shadow matching primary */
+    letter-spacing: 0.5px;
+    z-index: 1;
+    border: none;
+    /* Ensure no border */
+}
+
+/* Subtle shine effect on hover */
+.cta-highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: -1;
+}
+
+.cta-highlight:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px -10px rgba(46, 125, 50, 0.8);
+    background: var(--color-primary);
+    /* Maintain solid color */
+    filter: brightness(1.1);
+    /* Slightly brighten on hover */
+}
+
+.cta-highlight:hover::before {
+    transform: translateX(100%);
+}
+
+.cta-highlight span {
+    position: relative;
+    z-index: 2;
 }
