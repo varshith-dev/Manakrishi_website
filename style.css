@@ -2649,17 +2649,31 @@ body.light-mode .modal-content {
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+@keyframes floatIcon {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.1);
+    }
+}
+
 .modal-item:hover .modal-icon {
-    transform: scale(1.2) rotate(5deg);
+    animation: floatIcon 2s ease-in-out infinite;
 }
 
 .modal-item h3 {
     color: #fff;
     margin-bottom: 0.8rem;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
+    /* Slightly larger */
     font-weight: 700;
     position: relative;
     z-index: 1;
+    letter-spacing: -0.02em;
 }
 
 .modal-item p {
@@ -2669,6 +2683,61 @@ body.light-mode .modal-content {
     margin: 0;
     position: relative;
     z-index: 1;
+}
+
+/* Coming Soon Style */
+.modal-item.coming-soon {
+    cursor: default;
+    filter: grayscale(0.8);
+    opacity: 0.7;
+}
+
+/* --- Light Mode Modal Overrides --- */
+body.light-mode .modal-content .modal-title {
+    background: linear-gradient(135deg, #1a2b1d 0%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-mode .modal-close {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-mode .modal-close:hover {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+body.light-mode .modal-item {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .modal-item h3 {
+    color: #1a2b1d;
+}
+
+body.light-mode .modal-item p {
+    color: #4a5d4d;
+}
+
+body.light-mode .modal-item:not(.coming-soon):hover {
+    background: #fff;
+    border-color: var(--color-primary);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(58, 117, 50, 0.1);
+    transform: translateY(-5px);
+}
+
+body.light-mode .modal-item.coming-soon::after {
+    color: #d35400 !important;
+    background: rgba(255, 179, 0, 0.15);
+    border-color: rgba(255, 179, 0, 0.4);
+    -webkit-text-fill-color: initial;
 }
 
 /* Modal CTA strip (optional - keep layout clean) */

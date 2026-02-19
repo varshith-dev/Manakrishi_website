@@ -242,6 +242,7 @@ if (serviceFab && serviceModal) {
         if (focusables.length === 0) return;
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
+
         if (e.shiftKey) {
             if (document.activeElement === first) {
                 e.preventDefault();
@@ -254,6 +255,47 @@ if (serviceFab && serviceModal) {
             }
         }
     });
+
+    // Handle "Coming Soon" clicks
+    const comingSoonItems = document.querySelectorAll('.modal-item.coming-soon');
+    comingSoonItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const toast = document.createElement('div');
+            toast.textContent = "Service coming soon! Stay tuned.";
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0,0,0,0.8);
+                color: #fff;
+                padding: 12px 24px;
+                border-radius: 30px;
+                z-index: 3000;
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem;
+                animation: fadeInOut 2.5s ease forwards;
+            `;
+            document.body.appendChild(toast);
+
+            if (!document.querySelector('#toast-style')) {
+                const style = document.createElement('style');
+                style.id = 'toast-style';
+                style.textContent = `
+                    @keyframes fadeInOut {
+                        0% { opacity: 0; transform: translate(-50%, 20px); }
+                        10% { opacity: 1; transform: translate(-50%, 0); }
+                        90% { opacity: 1; transform: translate(-50%, 0); }
+                        100% { opacity: 0; transform: translate(-50%, -20px); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            setTimeout(() => toast.remove(), 2500);
+        });
+    });
+}
 }
 
 // Hero Background Slider
