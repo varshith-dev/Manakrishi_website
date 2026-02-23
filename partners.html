@@ -39,40 +39,59 @@
 
         /* --- Hero Section --- */
         .partners-hero {
-            min-height: 75vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(ellipse at 20% 50%, rgba(0, 188, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(45, 90, 39, 0.12) 0%, transparent 50%),
-                linear-gradient(180deg, #0a0f0b 0%, #0f1610 40%, #111a13 100%);
+            background: radial-gradient(ellipse at 20% 30%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(76, 175, 80, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(156, 39, 176, 0.1) 0%, transparent 70%),
+                linear-gradient(180deg, #030404 0%, #080d0a 40%, #0a110d 100%);
+            background-size: 200% 200%;
+            animation: heroBGShift 15s ease infinite;
         }
 
-        /* Animated mesh grid background */
+        @keyframes heroBGShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Animated grid background */
         .partners-hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(0, 188, 212, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 188, 212, 0.04) 1px, transparent 1px);
+                linear-gradient(rgba(0, 229, 255, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
             background-size: 60px 60px;
-            animation: gridPulse 8s ease-in-out infinite;
+            animation: gridPulse 6s ease-in-out infinite alternate;
             pointer-events: none;
+            -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 85%);
+            mask-image: radial-gradient(circle at center, black 10%, transparent 85%);
         }
 
         @keyframes gridPulse {
-
-            0%,
-            100% {
-                opacity: 0.3;
+            0% {
+                opacity: 0.2;
+                transform: perspective(500px) rotateX(20deg) scale(1);
             }
 
-            50% {
-                opacity: 0.7;
+            100% {
+                opacity: 0.6;
+                transform: perspective(500px) rotateX(20deg) scale(1.1);
             }
         }
 
@@ -80,105 +99,157 @@
         .hero-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(100px);
             pointer-events: none;
-            animation: orbFloat 12s ease-in-out infinite;
+            animation: orbFloat 12s ease-in-out infinite alternate;
+            mix-blend-mode: screen;
         }
 
         .hero-orb--1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(0, 188, 212, 0.08);
-            top: -100px;
-            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 229, 255, 0.18);
+            top: -150px;
+            left: -150px;
             animation-delay: 0s;
         }
 
         .hero-orb--2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(45, 90, 39, 0.1);
-            bottom: -80px;
-            right: -80px;
-            animation-delay: -4s;
+            width: 450px;
+            height: 450px;
+            background: rgba(76, 175, 80, 0.15);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -3s;
         }
 
         .hero-orb--3 {
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 179, 0, 0.06);
-            top: 30%;
-            right: 15%;
-            animation-delay: -8s;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 64, 129, 0.1);
+            top: 25%;
+            right: 30%;
+            animation-delay: -6s;
         }
 
         @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
 
-            0%,
+            33% {
+                transform: translate(50px, -40px) scale(1.15) rotate(15deg);
+            }
+
+            66% {
+                transform: translate(-40px, 50px) scale(0.85) rotate(-15deg);
+            }
+
             100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            25% {
-                transform: translate(30px, -20px) scale(1.1);
-            }
-
-            50% {
-                transform: translate(-20px, 30px) scale(0.9);
-            }
-
-            75% {
-                transform: translate(15px, 15px) scale(1.05);
+                transform: translate(30px, 30px) scale(1.1) rotate(5deg);
             }
         }
 
         .hero-inner {
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            padding: 0 5%;
+            max-width: 950px;
+            padding: 3rem 4rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: heroInnerFadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes heroInnerFadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 0.5rem 1.4rem;
-            background: rgba(0, 188, 212, 0.08);
-            color: var(--color-secondary);
-            border: 1px solid rgba(0, 188, 212, 0.25);
+            gap: 12px;
+            padding: 0.7rem 2rem;
+            background: linear-gradient(90deg, rgba(0, 229, 255, 0.15), rgba(76, 175, 80, 0.05));
+            color: #00e5ff;
+            border: 1px solid rgba(0, 229, 255, 0.4);
             border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-size: 0.85rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(8px);
-            animation: fadeInDown 0.8s ease-out;
+            letter-spacing: 5px;
+            margin: 0 auto 2.5rem auto;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(0, 229, 255, 0.2), inset 0 0 10px rgba(0, 229, 255, 0.1);
+            animation: fadeInDown 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 229, 255, 0.3), inset 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+
+        .hero-badge::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: badgeShine 3s infinite 2s;
+        }
+
+        @keyframes badgeShine {
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 200%;
+            }
+
+            100% {
+                left: 200%;
+            }
         }
 
         .hero-badge svg {
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
+            filter: drop-shadow(0 0 5px rgba(0, 229, 255, 0.8));
         }
 
         .partners-hero h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 4rem;
+            font-size: 5.5rem;
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: -2px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+            letter-spacing: -3px;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s both;
+            text-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
         }
 
         .partners-hero h1 .text-gradient {
-            background: linear-gradient(135deg, #4ade80, #00bcd4, #38bdf8);
+            background: linear-gradient(135deg, #00e5ff 0%, #4ade80 50%, #8b5cf6 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 6s ease-in-out infinite;
+            animation: gradientShift 5s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.2));
         }
 
         .partners-hero h1 .text-white {
@@ -198,23 +269,26 @@
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.55);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.35rem;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
-            max-width: 560px;
+            max-width: 700px;
             margin: 0 auto;
             font-weight: 300;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s both;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         /* Decorative line under hero */
         .hero-divider {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--color-secondary), transparent);
-            margin: 2.5rem auto 0;
-            border-radius: 2px;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #00e5ff, #4ade80, transparent);
+            margin: 3.5rem auto 0;
+            border-radius: 50px;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.6), 0 0 40px rgba(76, 175, 80, 0.3);
         }
 
         /* --- Mission Quote Section --- */
@@ -407,12 +481,13 @@
 
         /* Karthikeya (Founder) card - slight zoom to frame face better */
         .partner-bio-card:nth-child(1) .bio-img {
-            transform: scale(1.15);
-            object-position: center 20%;
+            transform: scale(1.0);
+            object-position: center 10%;
         }
 
         .partner-bio-card:nth-child(1):hover .bio-img {
-            transform: scale(1.25);
+            transform: scale(1.08);
+            /* matches default zoom */
             /* Inherits the color bloom from general hover, providing a cohesive look */
         }
 
@@ -595,18 +670,70 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="glass-nav">
-        <div class="logo" onclick="window.location.href='index.html'"><img src="assets/manakrishi-logo.png"
-                alt="Manakrishi Logo"></div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#how-it-works">How It Works</a>
-            <a href="index.html#contact">Contact</a>
+    <nav class="premium-nav partners-nav"
+        style="position: absolute; top: 0; width: 100%; z-index: 1000; background: transparent; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+        <div class="logo" onclick="window.location.href='index.html'"
+            style="cursor: pointer; display: flex; align-items: center; gap: 10px;">
+            <img src="assets/manakrishi-logo.png" alt="Manakrishi Logo"
+                style="height: 40px; width: auto; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.3));">
+            <span
+                style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; color: #fff; letter-spacing: 1px;">Manakrishi</span>
+        </div>
+        <div class="nav-links" style="display: flex; gap: 2.5rem; align-items: center;">
+            <a href="index.html" class="nav-link-custom">Home</a>
+            <a href="index.html#how-it-works" class="nav-link-custom">How It Works</a>
+            <a href="https://wa.me/918886124318" target="_blank" rel="noopener noreferrer"
+                class="nav-link-custom">Contact</a>
         </div>
         <div class="nav-actions">
-            <button class="cta-small" onclick="window.location.href='booking.html'">Book Service</button>
+            <button class="cta-small" onclick="window.location.href='booking.html'"
+                style="background: linear-gradient(90deg, #00e5ff, #4ade80); color: #080d0a; border: none; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);"
+                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0, 229, 255, 0.4)'"
+                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0, 229, 255, 0.2)'">Book
+                Service</button>
         </div>
     </nav>
+    <style>
+        .nav-link-custom {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-custom:hover {
+            color: #fff;
+        }
+
+        .nav-link-custom::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00e5ff, #4ade80);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link-custom:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none !important;
+            }
+
+            .logo span {
+                display: none !important;
+            }
+        }
+    </style>
 
     <!-- Hero Section -->
     <header class="partners-hero">
