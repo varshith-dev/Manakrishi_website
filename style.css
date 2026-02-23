@@ -3319,3 +3319,26 @@ body.light-mode .vision-card h3 {
 body.light-mode .vision-card p {
     color: #4a5d4d;
 }
+/* Pricing Calculator */
+.pricing-calculator { padding: 4rem 5%; background: var(--glass-bg); text-align: center; border-radius: 20px; max-width: 800px; margin: 0 auto 5rem; border: 1px solid var(--glass-border); }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; text-align: left; }
+.calc-input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.calc-input-group label { font-weight: 600; color: var(--color-text); }
+.calc-input-group select, .calc-input-group input { padding: 1rem; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.2); color: var(--color-text); outline: none; transition: border-color 0.3s; }
+.calc-input-group select:focus, .calc-input-group input:focus { border-color: var(--color-secondary); }
+body.light-mode .calc-input-group select, body.light-mode .calc-input-group input { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 0, 0, 0.1); color: var(--color-text); }
+.calc-result { margin-top: 2rem; padding: 2rem; background: rgba(0, 188, 212, 0.1); border-radius: 15px; border: 1px solid var(--color-secondary); }
+.calc-result h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--color-secondary); }
+.calc-result p { font-size: 2.5rem; font-weight: 700; color: var(--color-text); }
+@media (max-width: 600px) { .calc-grid { grid-template-columns: 1fr; } }
+
+
+/* Enhanced Slider Styling */
+.feedback-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding-bottom: 2rem; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
+.feedback-grid::-webkit-scrollbar { display: none; }
+.feedback-card { flex: 0 0 80%; max-width: 400px; scroll-snap-align: center; }
+.slider-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; }
+.slider-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: background 0.3s; }
+body.light-mode .slider-dot { background: rgba(0, 0, 0, 0.2); }
+.slider-dot.active { background: var(--color-secondary); }
+

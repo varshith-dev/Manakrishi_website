@@ -267,3 +267,70 @@ if (heroSlides.length > 0) {
         heroSlides[currentHeroSlide].classList.add('active');
     }, 5000); // Change image every 5 seconds
 }
+
+// Pricing Calculator Logic
+const calculateBtn = document.getElementById('calculate-btn');
+const areaInput = document.getElementById('area');
+const cropSelect = document.getElementById('crop');
+const priceDisplay = document.getElementById('estimated-price');
+
+if (calculateBtn && areaInput && cropSelect && priceDisplay) {
+    calculateBtn.addEventListener('click', () => {
+        const area = parseFloat(areaInput.value);
+        const cropRates = {
+            'paddy': 500, // Cost per acre for Paddy
+            'chilli': 600,
+            'cotton': 550,
+            'maize': 450,
+            'sugarcane': 700,
+            'orchard': 800
+        };
+
+        const selectedCrop = cropSelect.value;
+        if (isNaN(area) || area <= 0) {
+            alert('Please enter a valid area in acres.');
+            return;
+        }
+
+        const rate = cropRates[selectedCrop];
+        if (rate) {
+            const totalCost = area * rate;
+            priceDisplay.textContent = '' + totalCost.toLocaleString('en-IN');
+        } else {
+            priceDisplay.textContent = '0';
+        }
+    });
+}
+
+
+// Testimonial Slider Logic
+const feedbackGrid = document.querySelector('.feedback-grid');
+const feedbackCards = document.querySelectorAll('.feedback-card');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+if (feedbackGrid) {
+    feedbackGrid.addEventListener('mousedown', (e) => {
+        isDown = true;
+        feedbackGrid.classList.add('active');
+        startX = e.pageX - feedbackGrid.offsetLeft;
+        scrollLeft = feedbackGrid.scrollLeft;
+    });
+    feedbackGrid.addEventListener('mouseleave', () => {
+        isDown = false;
+        feedbackGrid.classList.remove('active');
+    });
+    feedbackGrid.addEventListener('mouseup', () => {
+        isDown = false;
+        feedbackGrid.classList.remove('active');
+    });
+    feedbackGrid.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - feedbackGrid.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fast
+        feedbackGrid.scrollLeft = scrollLeft - walk;
+    });
+}
+
